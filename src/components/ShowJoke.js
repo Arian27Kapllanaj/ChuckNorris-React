@@ -1,6 +1,6 @@
-const showJoke = ({ word }) => {
+const showJoke = ({ joke }) => {
     return (
-        <h1>{ word }</h1>
+        <h1>{ joke }</h1>
     )
 }
 

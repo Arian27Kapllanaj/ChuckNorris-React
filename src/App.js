@@ -1,39 +1,26 @@
 import logo from "./logo.svg";
 import "./App.css";
+import ShowJoke from "./components/ShowJoke";
 import { useState } from "react";
-import showJoke from "./components/ShowJoke";
 
 function App() {
-  const [word, setWord] = useState("");
-  const [s] = useState("");
-  const [correct] = useState([]);
 
-  function getWord() {
-    fetch("https://api.chucknorris.io/jokes/random")
-      .then((response) => response.json())
-      .then((data) => {
-        setWord(data[0]);
-        show();
-      });
-  }
+  const [joke, setJoke] = useState('No joke yet')
 
-  function show() {
-    let s = word;
-    //document.write(s);
+  function getJoke() {
+    fetch('https://api.chucknorris.io/jokes/random')
+      .then(response => response.json())
+      .then(data => setJoke(data['value']))
   }
 
   return (
-    <div className="App">
-      <header>
-        <h1>
-          Chuck Norris in React
-          <img src={logo} className="App-logo" alt="logo" />
-        </h1>
-      </header>
-
+    <div className="chuck">
       <div>
-        <button onClick={getWord}>Get a Joke</button>
-        <showJoke word={word} />
+        <h1>Chuck Norris Jokes in <img src={logo} className="App-logo" alt="logo" /></h1>
+      </div>
+      <div>
+        <button onClick={ getJoke }>Get Joke</button>
+        <ShowJoke joke={ joke } />
       </div>
     </div>
   );
